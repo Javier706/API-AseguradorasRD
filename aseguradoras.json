@@ -1,0 +1,67 @@
+[
+  {
+    "nombre": "ARS APS",
+    "descripcion": "ARS APS es una de las principales aseguradoras de salud en República Dominicana, ofreciendo cobertura nacional y una amplia red de proveedores.",
+    "logo_url": "https://example.com/logo-ars-aps.png",
+    "telefono": "+1 809-555-1234",
+    "email": "info@arsaps.com",
+    "sitio_web": "https://www.arsaps.com",
+    "direccion": "Av. Winston Churchill, Santo Domingo, República Dominicana",
+    "cobertura_nacional": 1,
+    "tipo_aseguradora": "ARS",
+    "servicios": "Laboratorios, hospitales, medicamentos, emergencias",
+    "fecha_creacion": "1990-01-01"
+  },
+  {
+    "nombre": "ARS Humano",
+    "descripcion": "Líder en el mercado dominicano con planes adaptados a diferentes necesidades, incluyendo cobertura internacional.",
+    "logo_url": "https://example.com/logo-humano.png",
+    "telefono": "+1 809-200-5555",
+    "email": "contacto@arshumano.com",
+    "sitio_web": "https://www.arshumano.com",
+    "direccion": "Av. 27 de Febrero, Santo Domingo",
+    "cobertura_nacional": 1,
+    "tipo_aseguradora": "ARS",
+    "servicios": "Consultas especializadas, maternidad, cirugías",
+    "fecha_creacion": "1995-05-15"
+  },
+  {
+    "nombre": "MAPFRE Salud ARS",
+    "descripcion": "Filial del grupo internacional MAPFRE, ofrece seguros de salud con estándares globales.",
+    "logo_url": "https://example.com/logo-mapfre.png",
+    "telefono": "+1 809-555-9876",
+    "email": "salud@mapfre.com.do",
+    "sitio_web": "https://www.mapfresalud.com.do",
+    "direccion": "Plaza Central, Santiago de los Caballeros",
+    "cobertura_nacional": 1,
+    "tipo_aseguradora": "ARS",
+    "servicios": "Medicina preventiva, seguro dental",
+    "fecha_creacion": "2002-03-20"
+  },
+  {
+    "nombre": "ARS Universal",
+    "descripcion": "Especializada en planes accesibles para familias y pequeños empresarios.",
+    "logo_url": "https://example.com/logo-universal.png",
+    "telefono": "+1 809-344-0000",
+    "email": "servicio@arsuniversal.com",
+    "sitio_web": "https://www.arsuniversal.com",
+    "direccion": "Calle El Conde, Zona Colonial, Santo Domingo",
+    "cobertura_nacional": 1,
+    "tipo_aseguradora": "ARS",
+    "servicios": "Paquetes familiares, medicina general",
+    "fecha_creacion": "2008-11-10"
+  },
+  {
+    "nombre": "ARS Futuro",
+    "descripcion": "Enfoque en tecnología médica innovadora y telemedicina.",
+    "logo_url": "https://example.com/logo-futuro.png",
+    "telefono": "+1 829 111 1111",
+    "email": "innovacion@arsfuturo.com",
+    "sitio_web": "https://www.arsfuturo.com",
+    "direccion": "Centro Olímpico, Santo Domingo Este",
+    "cobertura_nacional": 1,
+    "tipo_aseguradora": "ARS",
+    "servicios": "Telemedicina, equipos de última generación",
+    "fecha_creacion": "2015-07-01"
+  }
+]
