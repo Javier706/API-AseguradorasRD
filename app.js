@@ -12,6 +12,8 @@ app.use(express.json());
 //cargar json
 const AseguradorasPath = path.join(__dirname, 'aseguradoras.json');
 let aseguradoras = [];
+const usersPath = path.join(__dirname, 'users.json');
+let DBusers = [];
 
 try {
     const data = fs.readFileSync(AseguradorasPath, 'utf-8');
@@ -22,13 +24,22 @@ try {
     process.exit(1); 
 }
 
-//base de datos de users con passwords hasheadas
+//Creamos el json con los usuarios por defecto
+try {
+  const usersData = fs.readFileSync(usersPath, 'utf-8');
+  DBusers = JSON.parse(usersData);
+} catch (error) {
+  console.error("Error cargando usuarios:", error);
+  // Si el archivo no existe, lo creamos con los usuarios por defecto
+  DBusers = [
+      {username: 'Jcedano', hashedPassword: "$2b$10$LJnTZUIaHeSw77ZBr3NO9uhc8Cg.Wp0Kj.G43S2DAJT14hMj9DUfK"}, //!LJcedano$123
+      {username: 'GBadmin', hashedPassword: "$2b$10$kLsFUl5PhCt7lo0AbrvVB.qopE988YpDh9cRLgSLHiEdapq4nS9S2"} //!GBadmin$321
+  ];
+  fs.writeFileSync(usersPath, JSON.stringify(DBusers, null, 2));
+}
 
-const DBusers = [
-    {username: 'Jcedano', hashedPassword: "$2b$10$LJnTZUIaHeSw77ZBr3NO9uhc8Cg.Wp0Kj.G43S2DAJT14hMj9DUfK"}, //!LJcedano$123
-    {username: 'GBadmin', hashedPassword: "$2b$10$kLsFUl5PhCt7lo0AbrvVB.qopE988YpDh9cRLgSLHiEdapq4nS9S2"} //!GBadmin$321
 
-];
+
 
 //variable de entorno para Json token
 const secretKeyJW = process.env.JWT_SECRET;
@@ -86,6 +97,13 @@ const authMiddleware = (req,res,next) => {
     });
 
 };
+
+app.get('/users',authMiddleware, (req, res) => {
+  // Mapear para devolver solo los usernames
+  const usernames = DBusers.map(user =>user.username);
+  res.json(usernames)
+});
+
 
 
 //ENDPOINTS PUBLICOS
@@ -180,6 +198,11 @@ app.get('/', (req, res) => {
           <p>Envía un JSON con <code>username</code> y <code>password</code> para obtener acceso.</p>
         </div>
       </div>
+      <div class="endpoint">
+           <h3>Agregar nuevo usuario</h3>
+            <p><span class="method">POST</span> <code>/users</code></p>
+           <p>Requiere autenticación. Envía un JSON con <code>username</code> y <code>password</code>.</p>
+      </div>
     </body>
     </html>
   `;
@@ -260,6 +283,54 @@ app.delete('/aseguradoras/:nombre', authMiddleware, (req,res)=>{
         nuevas_total: aseguradoras.length
       });
 
+});
+
+//AGREGAR USUARIOS
+
+// Ruta para agregar nuevos usuarios (protegida por autenticación)
+app.post('/users', authMiddleware, async (req, res) => {
+  const { username, password } = req.body;
+
+  // Validación básica
+  if (!username || !password) {
+      return res.status(400).json({ 
+          error: "Datos incompletos",
+          campos_requeridos: ["username", "password"] 
+      });
+  }
+
+  // Verificar si el usuario ya existe
+  const userExists = DBusers.some(u => u.username === username);
+  if (userExists) {
+      return res.status(400).json({ error: "El usuario ya existe" });
+  }
+
+  try {
+      // Hash de la contraseña
+      const saltRounds = 10;
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+      // Crear nuevo usuario
+      const newUser = {
+          username,
+          hashedPassword
+      };
+
+      // Agregar a la base de datos
+      DBusers.push(newUser);
+      
+      // Guardar en el archivo JSON
+      fs.writeFileSync(usersPath, JSON.stringify(DBusers, null, 2));
+
+      res.status(201).json({ 
+          mensaje: "Usuario creado exitosamente",
+          username: newUser.username
+      });
+
+  } catch (error) {
+      console.error("Error al crear usuario:", error);
+      res.status(500).json({ error: "Error interno del servidor" });
+  }
 });
 
 
