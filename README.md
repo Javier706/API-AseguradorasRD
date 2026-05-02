@@ -4,7 +4,7 @@
 ## 📌 Descripción
 API sobre las aseguradoras de la República Dominicana, para que la información esté lo más rápido posible a su alcance.
 
-**Herramientas necesarias:** Node.js, Postman
+**Herramientas usadas para su desarrollo y prueba:** Node.js, Postman
 
 ## 🔗 API en producción
 [https://api-aseguradorasrd.onrender.com](https://api-aseguradorasrd.onrender.com)
