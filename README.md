@@ -4,13 +4,12 @@
 ## 📌 Descripción
 API sobre las aseguradoras de la República Dominicana, para que la información esté lo más rápido posible a su alcance.
 
-**Herramientas usadas para su desarrollo y prueba:** Node.js, Postman
-
 ## 🔗 API en producción
 [https://api-aseguradorasrd.onrender.com](https://api-aseguradorasrd.onrender.com)
 
 ## 🛠️ Tecnologías
 - Node.js + Express
+- Postman
 - JSON Web Token (JWT)
 - bcrypt (hashing de contraseñas)
 - File system como almacenamiento (JSON)
